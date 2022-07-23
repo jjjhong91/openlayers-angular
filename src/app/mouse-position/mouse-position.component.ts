@@ -41,7 +41,7 @@ export class MousePositionComponent implements OnInit {
   ngOnInit() {
 
     let customFormat = function(template: string): CoordinateFormat {
-      return (coordinate: number[] | undefined) => format(coordinate || [0, 0], template);
+      return (coordinate: number[] | undefined) => format(coordinate || [0, 0], template, 4);
     }
 
     this.control = new ControlMousePosition({

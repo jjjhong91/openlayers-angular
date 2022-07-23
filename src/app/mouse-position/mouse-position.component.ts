@@ -1,4 +1,4 @@
-import { createStringXY } from 'ol/coordinate';
+import { createStringXY, format, CoordinateFormat } from 'ol/coordinate';
 import {
   Component,
   OnInit,
@@ -39,9 +39,14 @@ export class MousePositionComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    let customFormat = function(template: string): CoordinateFormat {
+      return (coordinate: number[] | undefined) => format(coordinate || [0, 0], template);
+    }
+
     this.control = new ControlMousePosition({
       className: 'mouseposition-control',
-      coordinateFormat: createStringXY(4),
+      coordinateFormat: customFormat(this.positionTemplate),
       target: this.element.nativeElement,
       undefinedHTML: undefined,
     });
